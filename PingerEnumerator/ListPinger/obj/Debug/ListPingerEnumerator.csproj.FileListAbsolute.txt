@@ -1,0 +1,14 @@
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\ListPinger.exe.config
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.exe
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\ListPinger.exe
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\ListPinger.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\SharpSnmpLib.Full.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\SharpSnmpLib.Portable.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\SharpSnmpLib.Full.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\SharpSnmpLib.Portable.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPingerEnumerator.csprojResolveAssemblyReference.cache
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.ListPinger.resources
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.ImportHost.resources
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.Properties.Resources.resources
+E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPingerEnumerator.csproj.GenerateResource.Cache
