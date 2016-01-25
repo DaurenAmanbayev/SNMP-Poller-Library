@@ -29,7 +29,7 @@ namespace ListPinger
         
 
         #region METHODS
-        //проверка на наличие в списке
+        //checking that address not duplicate in our list
         private void ImportNotDuplicate(IPAddress address)
         {            
             if (!prevNetwork.Contains(address))
@@ -38,7 +38,7 @@ namespace ListPinger
                 countAdded++;
             }
         }        
-        //простая проверка из списка строк
+        //simple checking ip address from list
         private void ParseIPAddress(string line)
         {
             IPAddress address;
@@ -47,7 +47,7 @@ namespace ListPinger
                 ImportNotDuplicate(address);
             }          
         }
-        //извлечь строки из текста
+        //extract lines from textbox
         private void ExtractLine(string line)
         {
             string pattern = "\r\n";
@@ -57,23 +57,23 @@ namespace ListPinger
             bool stop = true;
             while (stop)
             {
-                next = line.IndexOf(pattern, prev);//находим требуемый индекс
-                if (next > prev)//если следующий индекс больше, чем предыдущий 
+                next = line.IndexOf(pattern, prev);
+                if (next > prev)
                 {
-                    Lines.Add(line.Substring(prev, next - prev));//добавить отрезок строки между индексами
+                    Lines.Add(line.Substring(prev, next - prev));
                     prev = next + 2;
                 }
-                else//если следующий индекс меньше, чем предыдущий 
+                else
                 {
-                    if (last < size)//проверяем, что индекс последнего совпадения меньше чем размер текста
+                    if (last < size)
                     {
-                        Lines.Add(line.Substring(last, size - last));//добавляем конец строки в наш перечень
+                        Lines.Add(line.Substring(last, size - last));
                     }
                     break;
                 }
             }
         }
-        //уведомления
+        //notification template
         private void Notification(string line)
         {
             MessageBox.Show(line, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -81,20 +81,20 @@ namespace ListPinger
         #endregion
 
         #region BUTTONS
-        //простой импорт из перечня строк
+        //simple import address list from textbox
         private void buttonImport_Click(object sender, EventArgs e)
         {
             string text = textBoxImport.Text;
-            if (text.Length != 0)//если размер текста не равно нулю
+            if (!string.IsNullOrWhiteSpace(text))//if text is not null or whitespace
             {
                 try
                 {
-                    ExtractLine(text);//извлекаем строки нашего текста
-                    foreach (string line in Lines)//для каждой строки 
+                    ExtractLine(text);//cut lines from text
+                    foreach (string line in Lines) 
                     {
-                        ParseIPAddress(line);//проводим парсинг
+                        ParseIPAddress(line);//parse lines
                     }
-                    //уведомляем пользователя о количестве импортированных адресов
+                    //and notify our user about count of imported addresses
                     Notification(string.Format("{0} ip addresses was imported from list!", countAdded));
                 }
                 catch (Exception ex)
@@ -109,26 +109,25 @@ namespace ListPinger
             }
         }     
        
-        //отмена операции
+        
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-        //парсинг и импорт адресов из текста
+        //parse and import from textbox
         private void buttonParse_Click(object sender, EventArgs e)
         {
             string text = textBoxImport.Text;
-            if (text.Length != 0)//если размер текста не равно нулю
+            if (!string.IsNullOrWhiteSpace(text))
             {
                 try
                 {
-                    List<IPAddress> list=RegexExtract.Singletone.ExtractIpAddress(text);
+                    List<IPAddress> list=RegexExtract.Singletone.ExtractIpAddress(text);//parse and extract address list from text
                     foreach (IPAddress address in list)
                     {
-                        ImportNotDuplicate(address);
-                    }
-                    //уведомляем пользователя о количестве импортированных адресов
+                        ImportNotDuplicate(address);//checking that address not duplicate
+                    }                    
                     Notification(string.Format("{0} ip addresses was parsed and imported from list!", countAdded));
                 }
                 catch (Exception ex)
@@ -142,16 +141,15 @@ namespace ListPinger
                 Notification("Import list is empty!");
             }
         }
-        //проверка парсингом
+        //checking with parse methods
         private void buttonCheck_Click(object sender, EventArgs e)
         {
             string text = textBoxImport.Text;
-            if (text.Length != 0)//если размер текста не равно нулю
+            if (!string.IsNullOrWhiteSpace(text))
             {
                 try
                 {
-                    int count=RegexExtract.Singletone.ExtractIpAddress(text).Count;
-                    //уведомляем пользователя о количестве импортированных адресов
+                    int count=RegexExtract.Singletone.ExtractIpAddress(text).Count;                    
                     Notification(string.Format("{0} ip addresses was parsed from list!", count));
                 }
                 catch (Exception ex)
@@ -165,14 +163,13 @@ namespace ListPinger
             }
 
         }
-        //добавить адрес
+        //add one single host
         private void buttonAddHost_Click(object sender, EventArgs e)
         {
             string text = textBoxImport.Text;
-            if (text.Length != 0)//если размер текста не равно нулю
+            if (!string.IsNullOrWhiteSpace(text))
             {
-                ParseIPAddress(text);
-                //уведомляем пользователя о количестве импортированных адресов
+                ParseIPAddress(text);               
                 Notification(string.Format("{0} ip addresses was imported from list!", countAdded));
                 this.DialogResult = DialogResult.OK;
             }
