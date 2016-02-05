@@ -11,6 +11,7 @@ using System.Net;
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SnmpLibrary
 {
@@ -22,6 +23,12 @@ namespace SnmpLibrary
         public SnmpLibrary()
         {
             InitializeComponent();
+            StartConfiguration();
+        }
+
+        private void StartConfiguration()
+        {
+            buttonCreate.Enabled = false;
         }
         /*FOR CREATING LIBRARY PLEASE INSERT INFORMATION ABOUT DEVICES ADDRESSES AND COMMUNITIES AS FOLLOWING FORMAT
          * 192.168.1.1 public
@@ -56,7 +63,7 @@ namespace SnmpLibrary
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            string text = textBoxLibraryContent.Text;
+            string text = richTextBoxLibraryContent.Text;
             IPAddress address;
             ExtractLine(text);
             foreach (string line in Lines)
@@ -106,7 +113,7 @@ namespace SnmpLibrary
                 {
                     line += key.ToString() + "\t" + network[key].ToString() + endline;
                 }
-                textBoxLibraryContent.Text = line;
+                richTextBoxLibraryContent.Text = line;
             }
             catch (Exception ex)
             {
@@ -118,9 +125,76 @@ namespace SnmpLibrary
         {
             ReadLibrary();
         }
+
         #endregion
 
+        private void richTextBoxLibraryContent_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(richTextBoxLibraryContent.Text))
+            {
+                buttonCreate.Enabled = true;
+            }
+            else
+            {
+                buttonCreate.Enabled = false;
+            }
+        }
 
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            {
+                HighlightText(richTextBoxLibraryContent, textBoxSearch.Text, Color.Crimson);
+            }        
+        }
+        //highlighting
+        private void HighlightText(RichTextBox myRtb, string word, Color color)
+        {
+          //  UndoAction(myRtb);  
+            
+            int s_start = myRtb.SelectionStart, startIndex = 0, index;
+
+            while ((index = myRtb.Text.IndexOf(word, startIndex)) != -1)
+            {
+                myRtb.Select(index, word.Length);
+                myRtb.SelectionColor = color;
+                startIndex = index + word.Length;
+            }
+
+            myRtb.SelectionStart = s_start;
+            myRtb.SelectionLength = 0;
+            myRtb.SelectionColor = Color.Black;
+        }
+        private void UndoAction(RichTextBox myRtb)
+        {
+            while (myRtb.CanUndo)
+            {
+                myRtb.Undo();
+                // Clear the undo buffer to prevent last action from being
+                myRtb.ClearUndo();
+            }
+        }
+        private void buttonReplace_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(textBoxSearch.Text) && !string.IsNullOrWhiteSpace(textBoxReplace.Text))
+            {
+                ReplaceAll(richTextBoxLibraryContent, textBoxSearch.Text, textBoxReplace.Text);
+            }
+        }
+        private void ReplaceAll(RichTextBox myRtb, string word, string replacement)
+        {
+            int i = 0;
+            int n = 0;
+            int a = replacement.Length - word.Length;
+            foreach (Match m in Regex.Matches(myRtb.Text, word))
+            {
+                myRtb.Select(m.Index + i, word.Length);
+                i += a;
+                myRtb.SelectedText = replacement;
+                n++;
+            }
+            MessageBox.Show("Replaced " + n + " matches!");
+        }
     }
     public static class SerializeExtention
     {
