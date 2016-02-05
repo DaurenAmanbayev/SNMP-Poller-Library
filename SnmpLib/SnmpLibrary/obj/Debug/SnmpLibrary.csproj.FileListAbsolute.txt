@@ -19,3 +19,12 @@ C:\Users\ktoloc\Desktop\Работа\Утилиты\SnmpLib\SnmpLibrary\SnmpLibr
 E:\Repository\SnmpLibrary\SnmpLib\SnmpLibrary\bin\Debug\SnmpLibrary.exe.config
 E:\Repository\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.exe
 E:\Repository\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.pdb
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\bin\Debug\SnmpLibrary.exe.config
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.exe
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.pdb
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\bin\Debug\SnmpLibrary.exe
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\bin\Debug\SnmpLibrary.pdb
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.SnmpLibrary.resources
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.Properties.Resources.resources
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\SnmpLib\SnmpLibrary\obj\Debug\SnmpLibrary.csproj.GenerateResource.Cache

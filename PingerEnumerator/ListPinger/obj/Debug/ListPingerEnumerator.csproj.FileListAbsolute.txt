@@ -12,3 +12,6 @@ E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.ListP
 E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.ImportHost.resources
 E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.Properties.Resources.resources
 E:\Repository\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPingerEnumerator.csproj.GenerateResource.Cache
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\PingerEnumerator\ListPinger\bin\Debug\ListPinger.exe.config
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.exe
+C:\Users\Lighto\Documents\GitHub\SnmpLibrary\PingerEnumerator\ListPinger\obj\Debug\ListPinger.pdb
