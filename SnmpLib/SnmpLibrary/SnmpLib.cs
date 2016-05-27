@@ -35,37 +35,43 @@ namespace SnmpLibrary
          * 192.168.1.2 guest
          */
         //извлечь строки из текста
-        private void ExtractLine(string line)
+        //private void ExtractLine(string line)
+        //{
+        //    string pattern = "\r\n";
+        //    int prev = 0, next = 0;
+        //    int last = line.LastIndexOf(pattern) + 2;//step of pattern
+        //    int size = line.Length;
+        //    bool stop = true;
+        //    while (stop)
+        //    {
+        //        next = line.IndexOf(pattern, prev);//find required index
+        //        if (next > prev) 
+        //        {
+        //            Lines.Add(line.Substring(prev, next - prev));//cut line between indexes
+        //            prev = next + 2;
+        //        }
+        //        else
+        //        {
+        //            if (last < size)//checking out of range
+        //            {
+        //                Lines.Add(line.Substring(last, size - last));//last line adding
+        //            }
+        //            break;
+        //        }
+        //    }
+        //}
+
+        public string[] ExtractLines(string input)
         {
-            string pattern = "\r\n";
-            int prev = 0, next = 0;
-            int last = line.LastIndexOf(pattern) + 2;//step of pattern
-            int size = line.Length;
-            bool stop = true;
-            while (stop)
-            {
-                next = line.IndexOf(pattern, prev);//find required index
-                if (next > prev) 
-                {
-                    Lines.Add(line.Substring(prev, next - prev));//cut line between indexes
-                    prev = next + 2;
-                }
-                else
-                {
-                    if (last < size)//checking out of range
-                    {
-                        Lines.Add(line.Substring(last, size - last));//last line adding
-                    }
-                    break;
-                }
-            }
+            return Regex.Split(input, "\r\n");
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
             string text = richTextBoxLibraryContent.Text;
             IPAddress address;
-            ExtractLine(text);
+            //********************************
+            Lines=ExtractLines(text).ToList();
             foreach (string line in Lines)
             {
                 string host = RegexExtract.Singletone.ExtractIP(line);
@@ -139,7 +145,7 @@ namespace SnmpLibrary
                 buttonCreate.Enabled = false;
             }
         }
-
+        //поиск и подсветка паттерна
         private void buttonFind_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(textBoxSearch.Text))
