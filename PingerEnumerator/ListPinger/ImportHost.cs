@@ -11,6 +11,7 @@ using System.Net;
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ListPinger
 {
@@ -73,6 +74,10 @@ namespace ListPinger
                 }
             }
         }
+        public string[] ExtractLines(string input)
+        {
+            return Regex.Split(input, "\r\n");
+        }
         //notification template
         private void Notification(string line)
         {
@@ -89,7 +94,7 @@ namespace ListPinger
             {
                 try
                 {
-                    ExtractLine(text);//cut lines from text
+                    Lines=ExtractLines(text).ToList();//cut lines from text
                     foreach (string line in Lines) 
                     {
                         ParseIPAddress(line);//parse lines
