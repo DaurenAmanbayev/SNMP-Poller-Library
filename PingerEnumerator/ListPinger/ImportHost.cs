@@ -18,20 +18,18 @@ namespace ListPinger
     public partial class ImportHost : Form
     {
         List<string> Lines = new List<string>();
-        public List<IPAddress> network = new List<IPAddress>();
-        public List<IPAddress> prevNetwork=new List<IPAddress>();
+        public List<string> network = new List<string>();
+        public List<string> prevNetwork=new List<string>();
         
-        int countAdded = 0;        
-        public ImportHost(List<IPAddress> prevNetwork)
+        int countAdded = 0;
+        public ImportHost(List<string> prev)
         {
+            prevNetwork = prev;
             InitializeComponent();
-            this.prevNetwork.AddRange(prevNetwork);
         }
-        
-
         #region METHODS
         //checking that address not duplicate in our list
-        private void ImportNotDuplicate(IPAddress address)
+        private void ImportNotDuplicate(string address)
         {            
             if (!prevNetwork.Contains(address))
             {
@@ -45,7 +43,7 @@ namespace ListPinger
             IPAddress address;
             if (IPAddress.TryParse(line, out address))
             {
-                ImportNotDuplicate(address);
+                ImportNotDuplicate(address.ToString());
             }          
         }
         //extract lines from textbox
@@ -74,6 +72,7 @@ namespace ListPinger
                 }
             }
         }
+
         public string[] ExtractLines(string input)
         {
             return Regex.Split(input, "\r\n");
@@ -131,7 +130,7 @@ namespace ListPinger
                     List<IPAddress> list=RegexExtract.Singletone.ExtractIpAddress(text);//parse and extract address list from text
                     foreach (IPAddress address in list)
                     {
-                        ImportNotDuplicate(address);//checking that address not duplicate
+                        ImportNotDuplicate(address.ToString());//checking that address not duplicate
                     }                    
                     Notification(string.Format("{0} ip addresses was parsed and imported from list!", countAdded));
                 }

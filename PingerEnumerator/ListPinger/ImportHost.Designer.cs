@@ -32,11 +32,9 @@
             this.textBoxImport = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonImport = new System.Windows.Forms.Button();
             this.buttonParse = new System.Windows.Forms.Button();
             this.buttonCheck = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonAddHost = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -68,8 +66,6 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.buttonAddHost);
-            this.flowLayoutPanel2.Controls.Add(this.buttonImport);
             this.flowLayoutPanel2.Controls.Add(this.buttonParse);
             this.flowLayoutPanel2.Controls.Add(this.buttonCheck);
             this.flowLayoutPanel2.Controls.Add(this.buttonCancel);
@@ -79,19 +75,9 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(94, 501);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
-            // buttonImport
-            // 
-            this.buttonImport.Location = new System.Drawing.Point(3, 43);
-            this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(91, 34);
-            this.buttonImport.TabIndex = 0;
-            this.buttonImport.Text = "Import Several";
-            this.buttonImport.UseVisualStyleBackColor = true;
-            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
-            // 
             // buttonParse
             // 
-            this.buttonParse.Location = new System.Drawing.Point(3, 83);
+            this.buttonParse.Location = new System.Drawing.Point(3, 3);
             this.buttonParse.Name = "buttonParse";
             this.buttonParse.Size = new System.Drawing.Size(91, 34);
             this.buttonParse.TabIndex = 2;
@@ -101,7 +87,7 @@
             // 
             // buttonCheck
             // 
-            this.buttonCheck.Location = new System.Drawing.Point(3, 123);
+            this.buttonCheck.Location = new System.Drawing.Point(3, 43);
             this.buttonCheck.Name = "buttonCheck";
             this.buttonCheck.Size = new System.Drawing.Size(91, 34);
             this.buttonCheck.TabIndex = 1;
@@ -111,23 +97,13 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(3, 163);
+            this.buttonCancel.Location = new System.Drawing.Point(3, 83);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(91, 34);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // buttonAddHost
-            // 
-            this.buttonAddHost.Location = new System.Drawing.Point(3, 3);
-            this.buttonAddHost.Name = "buttonAddHost";
-            this.buttonAddHost.Size = new System.Drawing.Size(91, 34);
-            this.buttonAddHost.TabIndex = 3;
-            this.buttonAddHost.Text = "Add Host";
-            this.buttonAddHost.UseVisualStyleBackColor = true;
-            this.buttonAddHost.Click += new System.EventHandler(this.buttonAddHost_Click);
             // 
             // ImportHost
             // 
@@ -154,10 +130,8 @@
         private System.Windows.Forms.TextBox textBoxImport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.Button buttonParse;
         private System.Windows.Forms.Button buttonCheck;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonAddHost;
     }
 }

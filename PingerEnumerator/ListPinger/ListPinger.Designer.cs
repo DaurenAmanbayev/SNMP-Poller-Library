@@ -78,8 +78,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
             this.splitContainer1.Panel2.Controls.Add(this.richTextBoxLog);
-            this.splitContainer1.Size = new System.Drawing.Size(835, 507);
-            this.splitContainer1.SplitterDistance = 249;
+            this.splitContainer1.Size = new System.Drawing.Size(643, 507);
+            this.splitContainer1.SplitterDistance = 191;
             this.splitContainer1.TabIndex = 1;
             // 
             // listBoxAddress
@@ -90,7 +90,7 @@
             this.listBoxAddress.Location = new System.Drawing.Point(0, 0);
             this.listBoxAddress.Name = "listBoxAddress";
             this.listBoxAddress.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxAddress.Size = new System.Drawing.Size(249, 507);
+            this.listBoxAddress.Size = new System.Drawing.Size(191, 507);
             this.listBoxAddress.TabIndex = 0;
             // 
             // contextMenuStripAddresses
@@ -152,7 +152,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 485);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.statusStrip1.Size = new System.Drawing.Size(582, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(448, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStripInfo";
             // 
@@ -167,7 +167,7 @@
             this.richTextBoxLog.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxLog.Name = "richTextBoxLog";
             this.richTextBoxLog.ReadOnly = true;
-            this.richTextBoxLog.Size = new System.Drawing.Size(582, 507);
+            this.richTextBoxLog.Size = new System.Drawing.Size(448, 507);
             this.richTextBoxLog.TabIndex = 0;
             this.richTextBoxLog.Text = "";
             // 
@@ -269,7 +269,7 @@
             this.toolStripButtonHelp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(835, 37);
+            this.toolStrip1.Size = new System.Drawing.Size(643, 37);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -288,7 +288,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 544);
+            this.ClientSize = new System.Drawing.Size(643, 544);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

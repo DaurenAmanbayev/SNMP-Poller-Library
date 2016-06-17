@@ -27,7 +27,7 @@ namespace ListPinger
     public partial class ListPinger : Form
     {
         #region VARIABLES
-        List<IPAddress> network = new List<IPAddress>();
+        List<string> network = new List<string>();
         List<Task> manager = new List<Task>();
         List<string> prevSnmpData = new List<string>();//snmp oid or key unique
 
@@ -79,31 +79,31 @@ namespace ListPinger
         {
             Ping pingSender = new Ping();
             IPAddress address = (IPAddress)host;
-            PingReply reply = pingSender.Send(address);                    
-            string report = "";     
+            PingReply reply = pingSender.Send(address);
+            StringBuilder report = new StringBuilder();  
             //если проверка успешна     
             if (reply.Status == IPStatus.Success)
             {
                 //создать отчет на основе данных
-                report += string.Format("Address: {0}", reply.Address.ToString()+lineEnd);
-                report += string.Format("RoundTrip time: {0}", reply.RoundtripTime) + lineEnd;
-                report += string.Format("Time to live: {0}", reply.Options.Ttl + lineEnd);
-                report += string.Format("Don't fragment: {0}", reply.Options.DontFragment + lineEnd);
-                report += string.Format("Buffer size: {0}", reply.Buffer.Length + lineEnd);
+                report.AppendLine(string.Format("Address: {0}", reply.Address.ToString()));
+                report.AppendLine(string.Format("RoundTrip time: {0}", reply.RoundtripTime));
+                report.AppendLine(string.Format("Time to live: {0}", reply.Options.Ttl));
+                report.AppendLine(string.Format("Don't fragment: {0}", reply.Options.DontFragment));
+                report.AppendLine(string.Format("Buffer size: {0}", reply.Buffer.Length));
                 successCount++;//увеличиваем количество успешных проверок                   
             }
             //если проверка не успешна
             else
             {
-                report += address.ToString() + lineEnd;
-                report += reply.Status+lineEnd;
+                report.AppendLine(address.ToString());
+                report.AppendLine(reply.Status.ToString());
                 failedCount++;//увеличиваем количество неуспешных проверок                                         
             }
-            report += lineDivider;
+            report.AppendLine(lineDivider);
             //блокируем наш объект
             lock(lockObject){
-                richTextBoxLog.Text+= report;
-                Logging(report);//=>log
+                richTextBoxLog.Text+= report.ToString();
+                Logging(report.ToString());//=>log
             }
         }       
         //блокировка кнопок
@@ -137,6 +137,7 @@ namespace ListPinger
             if (result == DialogResult.OK)
             {
                 network.AddRange(frm.network);
+                network.Sort();
                 frm.Close();
                 ListUpdate();
             }
@@ -150,32 +151,40 @@ namespace ListPinger
         //START PINGER
         private void toolStripButtonStartPing_Click(object sender, EventArgs e)
         {
-            Lock();
-            ProgressInit();//init current progress bar
-            foreach (IPAddress host in network)
+            try
             {
-                richTextBoxLog.Text += string.Format("Pinger started for {0} ip address" + Environment.NewLine, host);
-                Task task = Task.Factory.StartNew(Pinger, host);
-                //задачи не имеют доступа к richtextbox          
-                manager.Add(task);
+                Lock();
+                ProgressInit();//init current progress bar
+                foreach (var host in network)
+                {
+                    richTextBoxLog.Text += string.Format("Pinger started for {0} ip address" + Environment.NewLine, host);
+                    IPAddress address = IPAddress.Parse(host);
+                    Task task = Task.Factory.StartNew(Pinger, address);
+                    //задачи не имеют доступа к richtextbox          
+                    manager.Add(task);
+                }
+                //ожидаем выполнение каждой операции
+                foreach (Task task in manager)
+                {
+                    ProgressStep();//perform progress bar steps
+                    task.Wait();
+                }
+                manager.Clear();
+                //reporting            
+                StringBuilder report = new StringBuilder();
+                report.AppendLine(string.Format("Pinger report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count));
+                report.AppendLine(lineDivider);
+                richTextBoxLog.Text += report;
+                Logging(report.ToString());//=>log
+                ProgressClear();//clear progress
+                successCount = 0;
+                failedCount = 0;
+                Lock();
             }
-            //ожидаем выполнение каждой операции
-            foreach (Task task in manager)
+            catch (Exception ex)
             {
-                ProgressStep();//perform progress bar steps
-                task.Wait();               
+                MessageBox.Show(ex.Message+ ex.StackTrace);
             }
-            manager.Clear();
-            //reporting            
-            string report = "";       
-            report += string.Format("Pinger report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count)+lineEnd;          
-            report += lineDivider;
-            richTextBoxLog.Text +=report;
-            Logging(report);//=>log
-            ProgressClear();//clear progress
-            successCount = 0;
-            failedCount = 0;
-            Lock();            
         }      
         //CLEAR LOG
         private void toolStripButtonClearLog_Click(object sender, EventArgs e)
@@ -184,7 +193,7 @@ namespace ListPinger
         }
         #endregion
 
-        #region Enumerator
+        #region ENUMERATOR
         //запрос snmpget 
         private void SnmpGet(object agentInfo)
         {
@@ -228,6 +237,7 @@ namespace ListPinger
             }
 
         }
+        //добавить другие методы, а также функционал для возможности выбора метода
 
         private void toolStripButtonSnmpGet_Click(object sender, EventArgs e)
         {
@@ -247,11 +257,11 @@ namespace ListPinger
             {
                 Lock();
                 ProgressInit();//init current progress bar              
-                foreach (IPAddress host in network)
+                foreach (var host in network)
                 {
                     richTextBoxLog.Text += string.Format("Enumerator started for {0} ip address" + Environment.NewLine, host);
                     AgentInfo agent = new AgentInfo();
-                    agent.host = host;
+                    agent.host = IPAddress.Parse(host);
                     //agent.community = "Zapad_RO";
                     //agent.key = "1.3.6.1.2.1.1.3.0";
                     if (SnmpLibrary.ContainsKey(host))
@@ -287,11 +297,11 @@ namespace ListPinger
             {
                 Lock();
                 ProgressInit();//init current progress bar              
-                foreach (IPAddress host in network)
+                foreach (var host in network)
                 {
                     richTextBoxLog.Text += string.Format("Enumerator started for {0} ip address" + Environment.NewLine, host);
                     AgentInfo agent = new AgentInfo();
-                    agent.host = host;
+                    agent.host = IPAddress.Parse(host);
                     //agent.community = "Zapad_RO";
                     //agent.key = "1.3.6.1.2.1.1.3.0";
                     agent.community = community;
@@ -351,7 +361,7 @@ namespace ListPinger
         }
         #endregion
 
-        #region ProgressBar
+        #region PROGRESS BAR
         //PROGRESS INIT
         private void ProgressInit()
         {
@@ -392,8 +402,8 @@ namespace ListPinger
 
             if (listBoxAddress.SelectedIndex != -1)
             {
-                IPAddress address = IPAddress.Parse(selectedItems[0].ToString());
-                network.Remove(address);
+                //IPAddress address = IPAddress.Parse(selectedItems[0].ToString());
+                network.Remove(selectedItems[0].ToString());
                 listBoxAddress.Items.Remove(selectedItems[0]);
 
             }
@@ -410,8 +420,8 @@ namespace ListPinger
             {
                 for (int i = selectedItems.Count - 1; i >= 0; i--)
                 {
-                    IPAddress address = IPAddress.Parse(selectedItems[i].ToString());
-                    network.Remove(address);
+                    //IPAddress address = IPAddress.Parse(selectedItems[i].ToString());
+                    network.Remove(selectedItems[i].ToString());
                     listBoxAddress.Items.Remove(selectedItems[i]);
                 }
             }

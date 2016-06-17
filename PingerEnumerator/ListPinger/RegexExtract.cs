@@ -38,17 +38,7 @@ namespace ListPinger
             Regex regex = new Regex(pattern);
             Match match = regex.Match(input.Trim());
             return match.ToString();
-        }
-        //проверка электронной почты
-        public bool MailValidate(string input)
-        {
-            string pattern = @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-               @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
-
-            Regex regex = new Regex(pattern);
-            Match match = regex.Match(input.Trim());
-            return match.Success;
-        }
+        }        
         //заменить паттерны
         public string ReplacePattern(string input, string pattern, string replacement)
         {
@@ -70,11 +60,16 @@ namespace ListPinger
                 string strAddress = match.ToString();
                 if (IPAddress.TryParse(strAddress, out host))
                 {
-                    list.Add(host);
+                    if (!list.Contains(host))
+                    {
+                        list.Add(host);
+                    }
                 }
             }
             return list;
         }
+
+        #region UTILS
         //вернуть список совпадений по паттерну
         public ArrayList Separator(string input, string pattern)
         {
@@ -103,6 +98,7 @@ namespace ListPinger
             }
             return list;
         }
+        #endregion
 
     }
     struct SubstringInfo
