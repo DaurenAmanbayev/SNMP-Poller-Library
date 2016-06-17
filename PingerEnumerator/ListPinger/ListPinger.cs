@@ -286,11 +286,12 @@ namespace ListPinger
                 }
                 manager.Clear();
                 //reporting            
-                string report = "";
-                report += string.Format("Enumerator report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count) + lineEnd;
-                report += lineDivider;
+                StringBuilder report = new StringBuilder();
+                report.AppendFormat("Enumerator report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count);
+                report.AppendLine();
+                report.AppendLine(lineDivider);
                 richTextBoxLog.Text += report;
-                Logging(report);//=>log
+                Logging(report.ToString());//=>log
                 ProgressClear();//clear progress
                 successCount = 0;
                 failedCount = 0;
@@ -322,11 +323,12 @@ namespace ListPinger
                 }
                 manager.Clear();
                 //reporting            
-                string report = "";
-                report += string.Format("Enumerator report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count) + lineEnd;
-                report += lineDivider;
+                StringBuilder report = new StringBuilder();
+                report.AppendFormat(string.Format("Enumerator report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count));
+                report.AppendLine();
+                report.AppendLine(lineDivider);
                 richTextBoxLog.Text += report;
-                Logging(report);//=>log
+                Logging(report.ToString());//=>log
                 ProgressClear();//clear progress
                 successCount = 0;
                 failedCount = 0;
@@ -447,17 +449,19 @@ namespace ListPinger
         #region WRITE
         void Logging(string log)
         {
-            string[] content = new string[1] { "*** Logging data ***" };
+            string[] content = new string[1] { "===== Logging data ====" };
             FileInfo fileInf = new FileInfo(logjournal);
             if (fileInf.Exists && fileInf.Length < 4000000)//если размер не превышает 4 Мб, прочитать и дополнить данные лога
             {
                 FileRead(logjournal, ref content);
             }
-            string buffer = string.Join("\n", content);
-            string line = "\n";
+            string buffer = string.Join("\n", content);               
             string space = " => ";
             string date = DateTime.Now.ToString();
-            WriteCharacters(buffer + line + date + space + log, logjournal);
+            StringBuilder logs = new StringBuilder();
+            logs.AppendLine(buffer);
+            logs.AppendFormat(date + space + log);
+            WriteCharacters(logs.ToString(), logjournal);
         }
         public void FileRead(string targetPath, ref string[] content)
         {
