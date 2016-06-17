@@ -24,14 +24,7 @@ namespace SnmpLibrary
             }
         }
 
-        //snmp oid key checking
-        public string ParseOidKey(string input)
-        {
-            string pattern = @"(\d+\.){1,}\d";
-            Regex regex = new Regex(pattern);
-            Match match = regex.Match(input.Trim());
-            return match.ToString();
-        }
+        #region NODES
         //snmp community checking
         public string ParseCommunity(string input)
         {
@@ -39,17 +32,7 @@ namespace SnmpLibrary
             Regex regex = new Regex(pattern);
             Match match = regex.Match(input.Trim());
             return match.ToString();
-        }
-        //email address checking
-        public bool MailValidate(string input)
-        {
-            string pattern = @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-               @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
-
-            Regex regex = new Regex(pattern);
-            Match match = regex.Match(input.Trim());
-            return match.Success;
-        }
+        }       
         //replace pattern
         public string ReplacePattern(string input, string pattern, string replacement)
         {
@@ -83,6 +66,9 @@ namespace SnmpLibrary
             Match match = regex.Match(input.Trim());
             return match.ToString();
         }
+        #endregion
+
+        #region UTILS
         //list of matches by pattern
         public ArrayList Separator(string input, string pattern)
         {
@@ -111,7 +97,7 @@ namespace SnmpLibrary
             }
             return list;
         }
-
+        #endregion
     }
 
     struct SubstringInfo
