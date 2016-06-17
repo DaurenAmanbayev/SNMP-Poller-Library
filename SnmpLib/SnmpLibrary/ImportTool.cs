@@ -21,6 +21,10 @@ namespace SnmpLibrary
         {
             InitializeComponent();
         }
+        public SortedList GetImports
+        {
+            get { return network; }
+        }
         //импорт данных из таблицы Excel
         private void ImportFromExcel(string filename)
         {
@@ -37,6 +41,8 @@ namespace SnmpLibrary
                 var network = from c in excel.WorksheetRange<Node>("A1", "B1")
                               select c;
                 dataGridViewImport.DataSource = data.ToList();
+                dataGridViewImport.Update();
+               // MessageBox.Show(data.ToList().Count.ToString());
             }
             catch (Exception ex)
             {
@@ -46,13 +52,14 @@ namespace SnmpLibrary
         private void openExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Excel Files(*.xls)|*.xlsx";
+            open.Filter = "Excel Files(*.xlsx)|*.xlsx";
             open.FilterIndex = 1;
             if (open.ShowDialog() == DialogResult.OK)
             {
                 //проверить производительность!!!!
                 UseWaitCursor = true;
                 ImportFromExcel(open.FileName);
+                MessageBox.Show("Finished!", "Import From Excel");
                 UseWaitCursor = false;
 
             }
@@ -66,7 +73,6 @@ namespace SnmpLibrary
                 IPAddress address;
                 if (cellAddress.Value != null)
                 {
-
                     //если значение адреса не пустое, и ip address валидный
                     if (!string.IsNullOrWhiteSpace(cellAddress.Value.ToString()) && IPAddress.TryParse(cellAddress.Value.ToString(), out address))
                     {

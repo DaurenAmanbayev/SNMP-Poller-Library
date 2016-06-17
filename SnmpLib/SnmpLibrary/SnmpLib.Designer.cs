@@ -36,25 +36,25 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hELPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importFromExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.newLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.importFromExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearWorkspaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hELPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.newLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearWorkspaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonOpenLibrary = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonNewLibrary = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSaveLibrary = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonImportFromExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonNewLibrary = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonOpenLibrary = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSaveLibrary = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonImportFromExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonFindTool = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
@@ -147,36 +147,13 @@
             this.fILEToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.fILEToolStripMenuItem.Text = "FILE";
             // 
-            // eDITToolStripMenuItem
+            // newLibraryToolStripMenuItem
             // 
-            this.eDITToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findToolStripMenuItem,
-            this.clearWorkspaceToolStripMenuItem});
-            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
-            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.eDITToolStripMenuItem.Text = "EDIT";
-            // 
-            // hELPToolStripMenuItem
-            // 
-            this.hELPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.helpToolStripMenuItem1});
-            this.hELPToolStripMenuItem.Name = "hELPToolStripMenuItem";
-            this.hELPToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.hELPToolStripMenuItem.Text = "HELP";
-            // 
-            // importFromExcelToolStripMenuItem
-            // 
-            this.importFromExcelToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFromExcelToolStripMenuItem.Image")));
-            this.importFromExcelToolStripMenuItem.Name = "importFromExcelToolStripMenuItem";
-            this.importFromExcelToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.importFromExcelToolStripMenuItem.Text = "Import From Excel";
-            this.importFromExcelToolStripMenuItem.Click += new System.EventHandler(this.importFromExcelToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
+            this.newLibraryToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newLibraryToolStripMenuItem.Image")));
+            this.newLibraryToolStripMenuItem.Name = "newLibraryToolStripMenuItem";
+            this.newLibraryToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.newLibraryToolStripMenuItem.Text = "New Library";
+            this.newLibraryToolStripMenuItem.Click += new System.EventHandler(this.newLibraryToolStripMenuItem_Click);
             // 
             // openLibraryToolStripMenuItem
             // 
@@ -199,12 +176,34 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(167, 6);
             // 
+            // importFromExcelToolStripMenuItem
+            // 
+            this.importFromExcelToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFromExcelToolStripMenuItem.Image")));
+            this.importFromExcelToolStripMenuItem.Name = "importFromExcelToolStripMenuItem";
+            this.importFromExcelToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.importFromExcelToolStripMenuItem.Text = "Import From Excel";
+            this.importFromExcelToolStripMenuItem.Click += new System.EventHandler(this.importFromExcelToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // eDITToolStripMenuItem
+            // 
+            this.eDITToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findToolStripMenuItem,
+            this.clearWorkspaceToolStripMenuItem});
+            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
+            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.eDITToolStripMenuItem.Text = "EDIT";
             // 
             // findToolStripMenuItem
             // 
@@ -214,28 +213,6 @@
             this.findToolStripMenuItem.Text = "Find and Replace";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.helpToolStripMenuItem1.Text = "Help";
-            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
-            // 
-            // newLibraryToolStripMenuItem
-            // 
-            this.newLibraryToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newLibraryToolStripMenuItem.Image")));
-            this.newLibraryToolStripMenuItem.Name = "newLibraryToolStripMenuItem";
-            this.newLibraryToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.newLibraryToolStripMenuItem.Text = "New Library";
-            this.newLibraryToolStripMenuItem.Click += new System.EventHandler(this.newLibraryToolStripMenuItem_Click);
-            // 
             // clearWorkspaceToolStripMenuItem
             // 
             this.clearWorkspaceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearWorkspaceToolStripMenuItem.Image")));
@@ -244,47 +221,28 @@
             this.clearWorkspaceToolStripMenuItem.Text = "Clear Workspace";
             this.clearWorkspaceToolStripMenuItem.Click += new System.EventHandler(this.clearWorkspaceToolStripMenuItem_Click);
             // 
-            // toolStripButtonOpenLibrary
+            // hELPToolStripMenuItem
             // 
-            this.toolStripButtonOpenLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpenLibrary.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpenLibrary.Image")));
-            this.toolStripButtonOpenLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOpenLibrary.Name = "toolStripButtonOpenLibrary";
-            this.toolStripButtonOpenLibrary.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonOpenLibrary.Text = "Open Library";
-            this.toolStripButtonOpenLibrary.ToolTipText = "Import From Excel";
-            this.toolStripButtonOpenLibrary.Click += new System.EventHandler(this.toolStripButtonImport_Click);
+            this.hELPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.helpToolStripMenuItem1});
+            this.hELPToolStripMenuItem.Name = "hELPToolStripMenuItem";
+            this.hELPToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.hELPToolStripMenuItem.Text = "HELP";
             // 
-            // toolStripButtonNewLibrary
+            // aboutToolStripMenuItem
             // 
-            this.toolStripButtonNewLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonNewLibrary.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNewLibrary.Image")));
-            this.toolStripButtonNewLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonNewLibrary.Name = "toolStripButtonNewLibrary";
-            this.toolStripButtonNewLibrary.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonNewLibrary.Text = "New Library";
-            this.toolStripButtonNewLibrary.Click += new System.EventHandler(this.toolStripButtonOpenLibrary_Click);
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // toolStripButtonSaveLibrary
+            // helpToolStripMenuItem1
             // 
-            this.toolStripButtonSaveLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSaveLibrary.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveLibrary.Image")));
-            this.toolStripButtonSaveLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSaveLibrary.Name = "toolStripButtonSaveLibrary";
-            this.toolStripButtonSaveLibrary.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonSaveLibrary.Text = "Save Library";
-            this.toolStripButtonSaveLibrary.Click += new System.EventHandler(this.toolStripButtonSaveLibrary_Click);
-            // 
-            // toolStripButtonImportFromExcel
-            // 
-            this.toolStripButtonImportFromExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonImportFromExcel.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonImportFromExcel.Image")));
-            this.toolStripButtonImportFromExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonImportFromExcel.Name = "toolStripButtonImportFromExcel";
-            this.toolStripButtonImportFromExcel.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonImportFromExcel.Text = "Import Tool";
-            this.toolStripButtonImportFromExcel.ToolTipText = "Find and Replace";
-            this.toolStripButtonImportFromExcel.Click += new System.EventHandler(this.toolStripButtonFindTool_Click);
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem1.Text = "Help";
+            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStrip1
             // 
@@ -302,10 +260,52 @@
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // toolStripButtonNewLibrary
+            // 
+            this.toolStripButtonNewLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonNewLibrary.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNewLibrary.Image")));
+            this.toolStripButtonNewLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonNewLibrary.Name = "toolStripButtonNewLibrary";
+            this.toolStripButtonNewLibrary.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonNewLibrary.Text = "New Library";
+            this.toolStripButtonNewLibrary.Click += new System.EventHandler(this.toolStripButtonNewLibrary_Click);
+            // 
+            // toolStripButtonOpenLibrary
+            // 
+            this.toolStripButtonOpenLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpenLibrary.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpenLibrary.Image")));
+            this.toolStripButtonOpenLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpenLibrary.Name = "toolStripButtonOpenLibrary";
+            this.toolStripButtonOpenLibrary.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpenLibrary.Text = "Open Library";
+            this.toolStripButtonOpenLibrary.ToolTipText = "Import From Excel";
+            this.toolStripButtonOpenLibrary.Click += new System.EventHandler(this.toolStripButtonOpenLibrary_Click);
+            // 
+            // toolStripButtonSaveLibrary
+            // 
+            this.toolStripButtonSaveLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSaveLibrary.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveLibrary.Image")));
+            this.toolStripButtonSaveLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSaveLibrary.Name = "toolStripButtonSaveLibrary";
+            this.toolStripButtonSaveLibrary.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSaveLibrary.Text = "Save Library";
+            this.toolStripButtonSaveLibrary.Click += new System.EventHandler(this.toolStripButtonSaveLibrary_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonImportFromExcel
+            // 
+            this.toolStripButtonImportFromExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonImportFromExcel.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonImportFromExcel.Image")));
+            this.toolStripButtonImportFromExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonImportFromExcel.Name = "toolStripButtonImportFromExcel";
+            this.toolStripButtonImportFromExcel.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonImportFromExcel.Text = "Import Tool";
+            this.toolStripButtonImportFromExcel.ToolTipText = "Find and Replace";
+            this.toolStripButtonImportFromExcel.Click += new System.EventHandler(this.toolStripButtonImportFromExcel_Click);
             // 
             // toolStripSeparator2
             // 
@@ -320,6 +320,7 @@
             this.toolStripButtonFindTool.Name = "toolStripButtonFindTool";
             this.toolStripButtonFindTool.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonFindTool.Text = "Find Tool";
+            this.toolStripButtonFindTool.Click += new System.EventHandler(this.toolStripButtonFindTool_Click);
             // 
             // SnmpLibrary
             // 

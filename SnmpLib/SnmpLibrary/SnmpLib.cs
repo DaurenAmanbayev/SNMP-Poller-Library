@@ -17,13 +17,12 @@ namespace SnmpLibrary
 {
     public partial class SnmpLibrary : Form
     {
-        List<string> Lines = new List<string>();
+        List<string> lines = new List<string>();
         SortedList network = new SortedList();
-        string library = "library.conf";
+        string filter = "SNMP Library Files(*.sconf)|*.sconf|All Files(*.*)|*.*||";
         public SnmpLibrary()
         {
-            InitializeComponent();
-            //StartConfiguration();
+            InitializeComponent();          
         }
         
         /*
@@ -36,14 +35,12 @@ namespace SnmpLibrary
         {
             return Regex.Split(input, "\r\n");
         }
-
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void ImportFromTextBoxToList()
         {
             string text = richTextBoxLibraryContent.Text;
-            IPAddress address;
-            //********************************
-            Lines=ExtractLines(text).ToList();
-            foreach (string line in Lines)
+            IPAddress address;        
+            lines=ExtractLines(text).ToList();
+            foreach (string line in lines)
             {
                 string host = RegexExtract.Singletone.ExtractIP(line);
                 string community = RegexExtract.Singletone.ParseCommunity(line.Substring(host.Length));             
@@ -59,199 +56,85 @@ namespace SnmpLibrary
                         network.Add(address, community);
                     }
                 }
-            }
-            try
-            {
-                WriteLibrary();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
-        }
-
-        #region FILEIO
-        private void WriteLibrary()
-        {
-            File.WriteAllBytes(library, network.Serialize());
-        }
-
-        private void ReadLibrary()
-        {
-            try
-            {
-                byte[] data = File.ReadAllBytes(library);
-                                
-                Hashtable network = data.Deserialize();
-                string line = "";
-                string endline = Environment.NewLine;
-                foreach (IPAddress key in network.Keys)
-                {
-                    line += key.ToString() + "\t" + network[key].ToString() + endline;
-                }
-                richTextBoxLibraryContent.Text = line;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }            
-        }
-
-        private void buttonRead_Click(object sender, EventArgs e)
+        }                         
+        private void ClearWorkspace()
         {
-            ReadLibrary();
+            DialogResult result = MessageBox.Show("Are you sure to clear workspace?", "Clear Workspace", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                richTextBoxLibraryContent.Text = "";
+                lines.Clear();
+                network.Clear();
+            }
         }
-
-        #endregion
-        
-        
-        #region MENU
-
-        //File explorer
-        private void LoadFile(object sender, EventArgs e)
+        private void OpenLibrary()
         {
             OpenFileDialog open = new OpenFileDialog(); //создали экземпляр
             //установим фильтр для файлов
-            open.Filter = "RTF Files(*.rtf)|*.rtf|Text Files(*.txt)|*.txt|All Files(*.*)|*.*||";
+            open.Filter=filter;
             open.FilterIndex = 1;//по умолчанию фильтруются текстовые файлы
             if (open.ShowDialog() == DialogResult.OK)
             {
-                StreamReader reader = File.OpenText(open.FileName);
-                if (open.FileName.Contains(".txt"))
+                try
                 {
-                    try
+                    byte[] data = File.ReadAllBytes(open.FileName);
+                    ImportFromTextBoxToList();
+                    Hashtable network = data.Deserialize();
+                    StringBuilder builder = new StringBuilder();
+                    foreach (IPAddress key in network.Keys)
                     {
-                        richTextBoxMain.Text = reader.ReadToEnd(); //считываем файл до конца
-                        reader.Close(); //закрываем reader
+                        builder.AppendLine(key.ToString() + "\t" + network[key].ToString() + Environment.NewLine);
                     }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Wrong format!", "Editor - Open", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
+                    richTextBoxLibraryContent.Text = builder.ToString();
                 }
-                if (open.FileName.Contains(".rtf"))
+                catch (Exception)
                 {
-                    try
-                    {
-                        richTextBoxMain.Rtf = reader.ReadToEnd(); //считываем файл до конца
-                        reader.Close(); //закрываем reader
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Wrong format!", "Editor - Open", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
+                    MessageBox.Show("Wrong format!", "SNMP Library", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
+
             }
         }
-        private void SaveFile(object sender, EventArgs e)
+        private void SaveLibrary()
         {
             SaveFileDialog save = new SaveFileDialog();//создали экземпляр
-            save.Filter = "RTF Files(*.rtf)|*.rtf|Text Files(*.txt)|*.txt|All Files(*.*)|*.*||";
+            save.Filter = filter;
             save.FilterIndex = 1;//по умолчанию фильтруются текстовые файлы
             if (save.ShowDialog() == DialogResult.OK)
             {
-                StreamWriter writer = new StreamWriter(save.FileName);
-                if (save.FileName.Contains(".txt"))
+                try
                 {
-                    try
-                    {
-                        writer.Write(richTextBoxMain.Text); //записываем в файл содержимое поля
-                        writer.Close();//закрываем writer
-                        toSave = false;
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Not Access!", "Editor - Save", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
+                    File.WriteAllBytes(save.FileName, network.Serialize());
                 }
-                if (save.FileName.Contains(".rtf"))
+                catch (Exception)
                 {
-                    try
-                    {
-                        writer.Write(richTextBoxMain.Rtf); //записываем в файл содержимое поля
-                        writer.Close();//закрываем writer
-                        toSave = false;
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Not Access!", "Editor - Save", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
+                    MessageBox.Show("Can't Access!", "SNMP Library", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
         }
-
-        private void newLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ImportFromExcel()
         {
-
+            ImportTool frm = new ImportTool();
+            DialogResult result = frm.ShowDialog();
+            {
+                var imports = frm.GetImports;
+                StringBuilder builder = new StringBuilder();
+                string prevContent = richTextBoxLibraryContent.Text;
+                builder.AppendLine(prevContent);
+                foreach (IPAddress key in imports.Keys)
+                {
+                    builder.AppendLine(key.ToString() + "\t" + network[key].ToString());
+                }               
+                richTextBoxLibraryContent.Text = builder.ToString();
+            }
         }
-
-        private void openLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GetInfo()
         {
-
+            MessageBox.Show("SNMP Library http://daurenamanbayev.github.io/ 2016", "Info");
         }
-
-        private void saveLibraryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void importFromExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void findToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clearWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        #region TOOLSTRIP
-        private void toolStripButtonImport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButtonOpenLibrary_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButtonSaveLibrary_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButtonFindTool_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
+        
         #region FIND AND REPLACE
-        private void findAndReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        private void findAndReplace()
         {
             findToolStripMenuItem.Enabled = false;
             toolStripButtonFindTool.Enabled = false;
@@ -265,48 +148,27 @@ namespace SnmpLibrary
         {
             FindTool creator = (FindTool)sender;
             string pattern = creator.GetPattern;
-            string libraryContent = richTextBoxMain.Text;
-            if (Rabina(pattern, libraryContent))
+            if (creator.isReplaceMethod)
             {
-                if (creator.isReplaceMethod)
-                {
-                    string changeText = creator.GetReplaceWord;
-                    libraryContent = libraryContent.Replace(pattern, changeText);
-                    richTextBoxMain.Text = libraryContent;
-                    MessageBox.Show("Find and replaces " + countSuffix, "Editor - Find And Replace Information", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    countSuffix = 0;
-                    suffixIndex.Clear();
-                    suffixIndex.TrimToSize();
-                }
-                //use all selected item and other and other
-                else
-                {
-                    foreach (int targetIndex in suffixIndex)
-                    {
-                        richTextBoxMain.Select(targetIndex, pattern.Length);
-                        richTextBoxMain.SelectionColor = Color.Yellow;
-                    }
-                    MessageBox.Show("Find " + countSuffix, "Editor - Find Information", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    countSuffix = 0;
-                    suffixIndex.Clear();
-                    suffixIndex.TrimToSize();
-                }
+                ReplaceAll(richTextBoxLibraryContent, pattern, creator.GetReplaceWord);
             }
-            else MessageBox.Show("Target text '" + pattern + "' not found!", "Editor - Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //richTextBox1.Find(creator.GetData);
+            else
+            {
+                FindPattern(pattern);
+            }
         }
         void FindOnClosed(object sender, EventArgs args)
         {
             findToolStripMenuItem.Enabled = true;
             toolStripButtonFindTool.Enabled = true;
-        }      
+        }
 
         //поиск и подсветка паттерна
-        private void buttonFind_Click(object sender, EventArgs e)
+        private void FindPattern(string pattern)
         {
-            if (!string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            if (!string.IsNullOrWhiteSpace(pattern))
             {
-                HighlightText(richTextBoxLibraryContent, textBoxSearch.Text, Color.Crimson);
+                HighlightText(richTextBoxLibraryContent, pattern, Color.Crimson);
             }
         }
         //highlighting
@@ -336,30 +198,96 @@ namespace SnmpLibrary
                 myRtb.ClearUndo();
             }
         }
-        //private void buttonReplace_Click(object sender, EventArgs e)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(textBoxSearch.Text) && !string.IsNullOrWhiteSpace(textBoxReplace.Text))
-        //    {
-        //        ReplaceAll(richTextBoxLibraryContent, textBoxSearch.Text, textBoxReplace.Text);
-        //    }
-        //}
-        private void ReplaceAll(RichTextBox myRtb, string word, string replacement)
+        private void ReplaceAll(RichTextBox myRtb, string pattern, string replaceWord)
         {
             int i = 0;
             int n = 0;
-            int a = replacement.Length - word.Length;
-            foreach (Match m in Regex.Matches(myRtb.Text, word))
+            int a = replaceWord.Length - pattern.Length;
+            foreach (Match m in Regex.Matches(myRtb.Text, pattern))
             {
-                myRtb.Select(m.Index + i, word.Length);
+                myRtb.Select(m.Index + i, pattern.Length);
                 i += a;
-                myRtb.SelectedText = replacement;
+                myRtb.SelectedText = replaceWord;
                 n++;
             }
             MessageBox.Show("Replaced " + n + " matches!");
         }
-
         #endregion
 
+        #region MENU
+        private void newLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearWorkspace();
+        }
+                
+        private void openLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenLibrary();
+        }
+
+        private void saveLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveLibrary();
+        }
+
+        private void importFromExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImportFromExcel();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            findAndReplace();
+        }
+
+        private void clearWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearWorkspace();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetInfo();
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GetInfo();
+        }
+
+        #endregion       
+
+        #region TOOLSTRIP       
+        private void toolStripButtonNewLibrary_Click(object sender, EventArgs e)
+        {
+            ClearWorkspace();
+        }
+
+        private void toolStripButtonOpenLibrary_Click(object sender, EventArgs e)
+        {
+            OpenLibrary();
+        }
+
+        private void toolStripButtonSaveLibrary_Click(object sender, EventArgs e)
+        {
+            SaveLibrary();
+        }
+
+        private void toolStripButtonImportFromExcel_Click(object sender, EventArgs e)
+        {
+            ImportFromExcel();
+        }
+
+        private void toolStripButtonFindTool_Click(object sender, EventArgs e)
+        {
+            findAndReplace();
+        }
+        #endregion
 
     }
     public static class SerializeExtention
