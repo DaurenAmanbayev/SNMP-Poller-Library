@@ -40,8 +40,7 @@ namespace SnmpLibrary
                 //указываем, что начало обработки данных в указанном диапазоне
                 var network = from c in excel.WorksheetRange<Node>("A1", "B1")
                               select c;
-                dataGridViewImport.DataSource = data.ToList();
-                dataGridViewImport.Update();
+                dataGridViewImport.DataSource = data.ToList();               
                // MessageBox.Show(data.ToList().Count.ToString());
             }
             catch (Exception ex)
@@ -57,10 +56,9 @@ namespace SnmpLibrary
             if (open.ShowDialog() == DialogResult.OK)
             {
                 //проверить производительность!!!!
-                UseWaitCursor = true;
-                ImportFromExcel(open.FileName);
-                MessageBox.Show("Finished!", "Import From Excel");
-                UseWaitCursor = false;
+                this.UseWaitCursor = true;
+                ImportFromExcel(open.FileName);               
+                this.UseWaitCursor = false;
 
             }
         }
@@ -76,28 +74,23 @@ namespace SnmpLibrary
                     //если значение адреса не пустое, и ip address валидный
                     if (!string.IsNullOrWhiteSpace(cellAddress.Value.ToString()) && IPAddress.TryParse(cellAddress.Value.ToString(), out address))
                     {
-                        DataGridViewCell cellHostname = row.Cells["Hostname"];
+                        DataGridViewCell cellCommunity = row.Cells["Community"];
                         //если значение имени устройства не пустое
-                        if (!string.IsNullOrWhiteSpace(cellHostname.Value.ToString()))
+                        if (!string.IsNullOrWhiteSpace(cellCommunity.Value.ToString()))
                         {
-                            //если в таблице уже существует идентичный адрес, не добавлять
-                            if (!network.ContainsKey(cellAddress.Value.ToString()))
+                            //если в таблице уже существует идентичный адрес, удаляем предыдущее значение, добавляем новое
+                            if (network.ContainsKey(address.ToString()))
                             {
-                                //если в таблице существует идентичный устройство, не добавлять
-                                if (!network.ContainsValue(cellHostname.Value.ToString()))
-                                {
-                                    network.Add(cellAddress.Value.ToString(), cellHostname.Value.ToString());
-                                }
-                                else
-                                {
-                                    //указываем, что значение было не уникальным
-                                    uniqList.Add(cellHostname.Value.ToString());
-                                }
+                                network.Remove(address.ToString());
+                                network.Add(address.ToString(), cellCommunity.Value.ToString());
+
+                                //указываем, что значение было не уникальным
+                                uniqList.Add(address.ToString());
                             }
+                            //добавляем адрес, если ранее не встречался
                             else
                             {
-                                //указываем, что значение было не уникальным
-                                uniqList.Add(cellAddress.Value.ToString());
+                                network.Add(address.ToString(), cellCommunity.Value.ToString());
                             }
                         }
                     }
@@ -105,16 +98,16 @@ namespace SnmpLibrary
             }
             //clear datagridview
             dataGridViewImport.DataSource = null;
-        }
-        
+            dataGridViewImport.Rows.Clear();
+        }        
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
-
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataAggregate();
+            MessageBox.Show(string.Format("Обнаружено {0} конфликтов в данных", uniqList.Count), "Конфликты");
             this.DialogResult = DialogResult.OK;
         }
     }

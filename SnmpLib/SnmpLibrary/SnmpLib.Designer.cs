@@ -57,6 +57,9 @@
             this.toolStripButtonImportFromExcel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonFindTool = new System.Windows.Forms.ToolStripButton();
+            this.eXTRACTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byEnviromentLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -78,7 +81,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(381, 528);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(567, 528);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // statusStrip1
@@ -87,7 +90,7 @@
             this.toolStripStatusLabelInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 508);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(381, 20);
+            this.statusStrip1.Size = new System.Drawing.Size(567, 20);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -102,7 +105,8 @@
             this.richTextBoxLibraryContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLibraryContent.Location = new System.Drawing.Point(3, 58);
             this.richTextBoxLibraryContent.Name = "richTextBoxLibraryContent";
-            this.richTextBoxLibraryContent.Size = new System.Drawing.Size(375, 447);
+            this.richTextBoxLibraryContent.ReadOnly = true;
+            this.richTextBoxLibraryContent.Size = new System.Drawing.Size(561, 447);
             this.richTextBoxLibraryContent.TabIndex = 2;
             this.richTextBoxLibraryContent.Text = "";
             // 
@@ -118,7 +122,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(375, 49);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(561, 49);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // menuStrip1
@@ -126,10 +130,11 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fILEToolStripMenuItem,
             this.eDITToolStripMenuItem,
+            this.eXTRACTToolStripMenuItem,
             this.hELPToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(375, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(561, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -256,7 +261,7 @@
             this.toolStripButtonFindTool});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(375, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(561, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -322,14 +327,41 @@
             this.toolStripButtonFindTool.Text = "Find Tool";
             this.toolStripButtonFindTool.Click += new System.EventHandler(this.toolStripButtonFindTool_Click);
             // 
+            // eXTRACTToolStripMenuItem
+            // 
+            this.eXTRACTToolStripMenuItem.CheckOnClick = true;
+            this.eXTRACTToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.byLineToolStripMenuItem,
+            this.byEnviromentLineToolStripMenuItem});
+            this.eXTRACTToolStripMenuItem.Name = "eXTRACTToolStripMenuItem";
+            this.eXTRACTToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.eXTRACTToolStripMenuItem.Text = "EXTRACT";
+            // 
+            // byLineToolStripMenuItem
+            // 
+            this.byLineToolStripMenuItem.Checked = true;
+            this.byLineToolStripMenuItem.CheckOnClick = true;
+            this.byLineToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.byLineToolStripMenuItem.Name = "byLineToolStripMenuItem";
+            this.byLineToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.byLineToolStripMenuItem.Text = "By Line";
+            // 
+            // byEnviromentLineToolStripMenuItem
+            // 
+            this.byEnviromentLineToolStripMenuItem.CheckOnClick = true;
+            this.byEnviromentLineToolStripMenuItem.Name = "byEnviromentLineToolStripMenuItem";
+            this.byEnviromentLineToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.byEnviromentLineToolStripMenuItem.Text = "By Enviroment Line";
+            // 
             // SnmpLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 528);
+            this.ClientSize = new System.Drawing.Size(567, 528);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SnmpLibrary";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SNMP Library";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -375,6 +407,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonImportFromExcel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButtonFindTool;
+        private System.Windows.Forms.ToolStripMenuItem eXTRACTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byEnviromentLineToolStripMenuItem;
     }
 }
 

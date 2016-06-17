@@ -33,9 +33,9 @@ namespace SnmpLibrary
 
         public string[] ExtractLines(string input)
         {
-            return Regex.Split(input, "\r\n");
+            return Regex.Split(input, "\n");//import problem with lines \r\n or \n
         }
-        private void ImportFromTextBoxToList()
+        private void ImportFromTextBox()
         {
             string text = richTextBoxLibraryContent.Text;
             IPAddress address;        
@@ -79,8 +79,8 @@ namespace SnmpLibrary
                 try
                 {
                     byte[] data = File.ReadAllBytes(open.FileName);
-                    ImportFromTextBoxToList();
-                    Hashtable network = data.Deserialize();
+                    ImportFromTextBox();
+                    SortedList network = data.Deserialize();
                     StringBuilder builder = new StringBuilder();
                     foreach (IPAddress key in network.Keys)
                     {
@@ -104,6 +104,7 @@ namespace SnmpLibrary
             {
                 try
                 {
+                    ImportFromTextBox();
                     File.WriteAllBytes(save.FileName, network.Serialize());
                 }
                 catch (Exception)
@@ -121,9 +122,9 @@ namespace SnmpLibrary
                 StringBuilder builder = new StringBuilder();
                 string prevContent = richTextBoxLibraryContent.Text;
                 builder.AppendLine(prevContent);
-                foreach (IPAddress key in imports.Keys)
+                foreach (var key in imports.Keys)
                 {
-                    builder.AppendLine(key.ToString() + "\t" + network[key].ToString());
+                    builder.AppendLine(key + "\t" + imports[key].ToString());
                 }               
                 richTextBoxLibraryContent.Text = builder.ToString();
             }
@@ -299,11 +300,11 @@ namespace SnmpLibrary
             formatter.Serialize(stream, data);
             return stream.ToArray();
         }
-        public static Hashtable Deserialize(this byte[] data)
+        public static SortedList Deserialize(this byte[] data)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream stream = new MemoryStream(data);
-            return (Hashtable)formatter.Deserialize(stream);
+            return (SortedList)formatter.Deserialize(stream);
         }
     }
 }

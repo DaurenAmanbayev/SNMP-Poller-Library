@@ -8,7 +8,7 @@ namespace SnmpLibrary
 {
     class Node
     {
-        public string Address;
-        public string Community;
+        public string Address { get; set; }
+        public string Community { get; set; }
     }
 }

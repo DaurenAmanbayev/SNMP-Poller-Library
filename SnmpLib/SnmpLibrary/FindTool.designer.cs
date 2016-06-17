@@ -116,7 +116,7 @@
             // FindTool
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.Crimson;
+            this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(276, 124);
             this.ControlBox = false;
             this.Controls.Add(this.textBoxReplaceWord);
