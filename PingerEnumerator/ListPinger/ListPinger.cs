@@ -42,6 +42,8 @@ namespace ListPinger
         string community = "public";
         string library = "library";
         string key = "1.3.6.1.2.1.1.3.0";
+
+        StringBuilder logBuilder = new StringBuilder();
         #endregion
 
         public ListPinger()
@@ -102,7 +104,7 @@ namespace ListPinger
             report.AppendLine(lineDivider);
             //блокируем наш объект
             lock(lockObject){
-                richTextBoxLog.Text+= report.ToString();
+                logBuilder= report;
                 Logging(report.ToString());//=>log
             }
         }       
@@ -165,9 +167,10 @@ namespace ListPinger
                 }
                 //ожидаем выполнение каждой операции
                 foreach (Task task in manager)
-                {
-                    ProgressStep();//perform progress bar steps
+                {                    
                     task.Wait();
+                    ProgressStep();//perform progress bar steps
+                    richTextBoxLog.Text += logBuilder;
                 }
                 manager.Clear();
                 //reporting            
@@ -205,7 +208,8 @@ namespace ListPinger
                     new OctetString(agent.community),
                     new List<Variable> { new Variable(new ObjectIdentifier(agent.key)) },
                      500);
-                string report = string.Format("SNMP access checking for {0} by {1} key with {2} community", agent.host, agent.key, agent.community) + lineEnd;
+                StringBuilder report = new StringBuilder();
+                report.AppendLine(string.Format("SNMP access checking for {0} by {1} key with {2} community", agent.host, agent.key, agent.community));
                 //доработать ...
                 if (result.Count > 0)
                 {
@@ -216,14 +220,14 @@ namespace ListPinger
                     failedCount++;
                 }
 
-                foreach (Variable v in result)
+                foreach (Variable variable in result)
                 {
-                    report += v + lineEnd;
+                    report.AppendLine(variable.ToString());
                 }
                 lock (lockObject)
                 {
-                    richTextBoxLog.Text += report + lineDivider;
-                    Logging(report);//=>log
+                    logBuilder = report;
+                    Logging(report.ToString());//=>log
                 }
             }
             catch (Exception)
