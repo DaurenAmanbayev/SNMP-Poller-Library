@@ -24,6 +24,10 @@ namespace ListPinger
         public string key;
         public string community;
     }
+    /*
+    добавить папку с библиотеками, сделать функцию поиска 
+    или же в отдельном окне сделать менеджер библиотек, затем обращаться к файлу при выборе с проведения опроса устройств
+    */
     public partial class ListPinger : Form
     {
         #region VARIABLES
@@ -87,11 +91,11 @@ namespace ListPinger
             if (reply.Status == IPStatus.Success)
             {
                 //создать отчет на основе данных
-                report.AppendLine(string.Format("Address: {0}", reply.Address.ToString()));
-                report.AppendLine(string.Format("RoundTrip time: {0}", reply.RoundtripTime));
-                report.AppendLine(string.Format("Time to live: {0}", reply.Options.Ttl));
-                report.AppendLine(string.Format("Don't fragment: {0}", reply.Options.DontFragment));
-                report.AppendLine(string.Format("Buffer size: {0}", reply.Buffer.Length));
+                report.AppendLine($"Address: {reply.Address.ToString()}");
+                report.AppendLine($"RoundTrip time: {reply.RoundtripTime}");
+                report.AppendLine($"Time to live: {reply.Options.Ttl}");
+                report.AppendLine($"Don't fragment: {reply.Options.DontFragment}");
+                report.AppendLine($"Buffer size: {reply.Buffer.Length}");
                 successCount++;//увеличиваем количество успешных проверок                   
             }
             //если проверка не успешна
@@ -175,7 +179,7 @@ namespace ListPinger
                 manager.Clear();
                 //reporting            
                 StringBuilder report = new StringBuilder();
-                report.AppendLine(string.Format("Pinger report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count));
+                report.AppendLine($"Pinger report => success {successCount}, failed {failedCount}, all {network.Count}");
                 report.AppendLine(lineDivider);
                 richTextBoxLog.Text += report;
                 Logging(report.ToString());//=>log
@@ -197,6 +201,8 @@ namespace ListPinger
         #endregion
 
         #region ENUMERATOR
+        //добавить другие методы для опроса устройства
+        //snmpwalk, snmpbulkwalk, snmpbulkget
         //запрос snmpget 
         private void SnmpGet(object agentInfo)
         {
@@ -209,7 +215,8 @@ namespace ListPinger
                     new List<Variable> { new Variable(new ObjectIdentifier(agent.key)) },
                      500);
                 StringBuilder report = new StringBuilder();
-                report.AppendLine(string.Format("SNMP access checking for {0} by {1} key with {2} community", agent.host, agent.key, agent.community));
+                report.AppendLine(
+                    $"SNMP access checking for {agent.host} by {agent.key} key with {agent.community} community");
                 //доработать ...
                 if (result.Count > 0)
                 {
@@ -220,7 +227,7 @@ namespace ListPinger
                     failedCount++;
                 }
 
-                foreach (Variable variable in result)
+                foreach (var variable in result)
                 {
                     report.AppendLine(variable.ToString());
                 }
@@ -235,8 +242,8 @@ namespace ListPinger
                 failedCount++;
                 lock (lockObject)
                 {
-                    richTextBoxLog.Text += string.Format("Time out for {0} was exceeded...", ((AgentInfo)agentInfo).host) + lineEnd + lineDivider;
-                    Logging(string.Format("Time out for {0} was exceeded...", ((AgentInfo)agentInfo).host) + lineEnd + lineDivider);
+                    richTextBoxLog.Text += $"Time out for {((AgentInfo) agentInfo).host} was exceeded..." + lineEnd + lineDivider;
+                    Logging($"Time out for {((AgentInfo) agentInfo).host} was exceeded..." + lineEnd + lineDivider);
                 }
             }
 
@@ -324,7 +331,8 @@ namespace ListPinger
                 manager.Clear();
                 //reporting            
                 StringBuilder report = new StringBuilder();
-                report.AppendFormat(string.Format("Enumerator report => success {0}, failed {1}, all {2}", successCount, failedCount, network.Count));
+                report.AppendFormat(
+                    $"Enumerator report => success {successCount}, failed {failedCount}, all {network.Count}");
                 report.AppendLine();
                 report.AppendLine(lineDivider);
                 richTextBoxLog.Text += report;
