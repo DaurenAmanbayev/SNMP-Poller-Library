@@ -219,9 +219,7 @@ namespace ListPinger
                     new List<Variable> { new Variable(new ObjectIdentifier(agent.key)) },
                      500);
                 StringBuilder report = new StringBuilder();
-                report.AppendLine(
-                    String.Format("SNMP access checking for {0} by {1} key with {2} community", agent.host, agent.key,
-                        agent.community));
+                report.AppendFormat("SNMP access checking for {0} by {1} key with {2} community\r\n", agent.host, agent.key,agent.community);
                 //доработать ...
                 if (result.Count > 0)
                 {
@@ -238,7 +236,7 @@ namespace ListPinger
                 }
                 lock (lockObject)
                 {
-                    logBuilder = report;
+                    logBuilder.AppendLine(report.ToString()+lineDivider);
                     Logging(report.ToString());//=>log
                 }
             }
@@ -290,13 +288,14 @@ namespace ListPinger
                     }
                     
                 }
+                richTextBoxLog.Text += lineDivider;
                 //ожидаем выполнение каждой операции
                 foreach (Task task in manager)
                 {
                     ProgressStep();//perform progress bar steps
                     task.Wait();
-                    richTextBoxLog.Text += logBuilder;
                 }
+                richTextBoxLog.Text += logBuilder;
                 manager.Clear();
                 //reporting            
                 StringBuilder report = new StringBuilder();
@@ -306,6 +305,7 @@ namespace ListPinger
                 richTextBoxLog.Text += report;
                 Logging(report.ToString());//=>log
                 ProgressClear();//clear progress
+                logBuilder.Clear();
                 successCount = 0;
                 failedCount = 0;
                 Lock();
@@ -328,12 +328,14 @@ namespace ListPinger
                     //задачи не имеют доступа к richtextbox          
                     manager.Add(task);
                 }
+                richTextBoxLog.Text += lineDivider;
                 //ожидаем выполнение каждой операции
                 foreach (Task task in manager)
                 {
                     ProgressStep();//perform progress bar steps
-                    task.Wait();
+                    task.Wait();    
                 }
+                richTextBoxLog.Text += logBuilder;
                 manager.Clear();
                 //reporting            
                 StringBuilder report = new StringBuilder();
@@ -345,6 +347,7 @@ namespace ListPinger
                 richTextBoxLog.Text += report;
                 Logging(report.ToString());//=>log
                 ProgressClear();//clear progress
+                logBuilder.Clear();
                 successCount = 0;
                 failedCount = 0;
                 Lock();
