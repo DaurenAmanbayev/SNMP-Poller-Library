@@ -28,26 +28,30 @@ namespace ListPinger
     добавить папку с библиотеками, сделать функцию поиска 
     или же в отдельном окне сделать менеджер библиотек, затем обращаться к файлу при выборе с проведения опроса устройств
     */
+
     public partial class ListPinger : Form
     {
         #region VARIABLES
+
         List<string> network = new List<string>();
         List<Task> manager = new List<Task>();
-        List<string> prevSnmpData = new List<string>();//snmp oid or key unique
+        List<string> prevSnmpData = new List<string>(); //snmp oid or key unique
 
-        Hashtable SnmpLibrary = new Hashtable();
+        SortedList SnmpLibrary = new SortedList();
         bool isLibrary = false;
         bool isLock = false;
         int successCount = 0;
         int failedCount = 0;
         string lineEnd = Environment.NewLine;
         string lineDivider = new string('-', 80);
-        string logjournal = "logging.dat";
+        readonly string logjournal = "logging.dat";
         string community = "public";
+        readonly string folder = "lib";
         string library = "library";
         string key = "1.3.6.1.2.1.1.3.0";
 
         StringBuilder logBuilder = new StringBuilder();
+
         #endregion
 
         public ListPinger()
@@ -62,14 +66,14 @@ namespace ListPinger
             prevSnmpData.Add(community);
             prevSnmpData.Add(library);
             prevSnmpData.Add(key);
-            ReadConfiguration();
+            ReadLibrary();
         }
 
-        private void ReadConfiguration()
+        private void ReadLibrary()
         {
             try
             {
-                byte[] data = File.ReadAllBytes("library.conf");
+                byte[] data = File.ReadAllBytes("library.sconf");
                 SnmpLibrary = data.Deserialize();
             }
             catch (Exception ex)
@@ -78,7 +82,7 @@ namespace ListPinger
             }
         }
 
-        #region Pinger
+        #region PINGER
         private static object lockObject=new object();
         //автомат доступности устройства
         private void Pinger(object host)
@@ -91,11 +95,11 @@ namespace ListPinger
             if (reply.Status == IPStatus.Success)
             {
                 //создать отчет на основе данных
-                report.AppendLine($"Address: {reply.Address.ToString()}");
-                report.AppendLine($"RoundTrip time: {reply.RoundtripTime}");
-                report.AppendLine($"Time to live: {reply.Options.Ttl}");
-                report.AppendLine($"Don't fragment: {reply.Options.DontFragment}");
-                report.AppendLine($"Buffer size: {reply.Buffer.Length}");
+                report.AppendLine(String.Format("Address: {0}", reply.Address.ToString()));
+                report.AppendLine(String.Format("RoundTrip time: {0}", reply.RoundtripTime));
+                report.AppendLine(String.Format("Time to live: {0}", reply.Options.Ttl));
+                report.AppendLine(String.Format("Don't fragment: {0}", reply.Options.DontFragment));
+                report.AppendLine(String.Format("Buffer size: {0}", reply.Buffer.Length));
                 successCount++;//увеличиваем количество успешных проверок                   
             }
             //если проверка не успешна
@@ -179,7 +183,7 @@ namespace ListPinger
                 manager.Clear();
                 //reporting            
                 StringBuilder report = new StringBuilder();
-                report.AppendLine($"Pinger report => success {successCount}, failed {failedCount}, all {network.Count}");
+                report.AppendLine(string.Format("Pinger report => success {0}, failed {1}, all {2}", successCount,failedCount, network.Count));
                 report.AppendLine(lineDivider);
                 richTextBoxLog.Text += report;
                 Logging(report.ToString());//=>log
@@ -216,7 +220,8 @@ namespace ListPinger
                      500);
                 StringBuilder report = new StringBuilder();
                 report.AppendLine(
-                    $"SNMP access checking for {agent.host} by {agent.key} key with {agent.community} community");
+                    String.Format("SNMP access checking for {0} by {1} key with {2} community", agent.host, agent.key,
+                        agent.community));
                 //доработать ...
                 if (result.Count > 0)
                 {
@@ -242,8 +247,9 @@ namespace ListPinger
                 failedCount++;
                 lock (lockObject)
                 {
-                    richTextBoxLog.Text += $"Time out for {((AgentInfo) agentInfo).host} was exceeded..." + lineEnd + lineDivider;
-                    Logging($"Time out for {((AgentInfo) agentInfo).host} was exceeded..." + lineEnd + lineDivider);
+                    richTextBoxLog.Text +=
+                        String.Format("Time out for {0} was exceeded...", ((AgentInfo) agentInfo).host) + lineEnd + lineDivider;
+                    Logging(String.Format("Time out for {0} was exceeded...", ((AgentInfo) agentInfo).host) + lineEnd + lineDivider);
                 }
             }
 
@@ -332,7 +338,8 @@ namespace ListPinger
                 //reporting            
                 StringBuilder report = new StringBuilder();
                 report.AppendFormat(
-                    $"Enumerator report => success {successCount}, failed {failedCount}, all {network.Count}");
+                    String.Format("Enumerator report => success {0}, failed {1}, all {2}", successCount, failedCount,
+                        network.Count));
                 report.AppendLine();
                 report.AppendLine(lineDivider);
                 richTextBoxLog.Text += report;
@@ -509,22 +516,35 @@ namespace ListPinger
         }
         #endregion
 
+        private void toolStripButtonSettings_Click(object sender, EventArgs e)
+        {
+            LibraryManager frm=new LibraryManager();
+            DialogResult result = frm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+
+            }
+        }
+
+       
+
     }
 
     public static class SerializeExtention
     {
-        public static byte[] Serialize(this Hashtable data)
+        public static byte[] Serialize(this SortedList data)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream stream = new MemoryStream();
             formatter.Serialize(stream, data);
             return stream.ToArray();
         }
-        public static Hashtable Deserialize(this byte[] data)
+        public static SortedList Deserialize(this byte[] data)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream stream = new MemoryStream(data);
-            return (Hashtable)formatter.Deserialize(stream);
+            return (SortedList)formatter.Deserialize(stream);
         }
     }
 }
