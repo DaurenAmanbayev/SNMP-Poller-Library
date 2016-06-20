@@ -247,8 +247,7 @@ namespace ListPinger
                 failedCount++;
                 lock (lockObject)
                 {
-                    richTextBoxLog.Text +=
-                        String.Format("Time out for {0} was exceeded...", ((AgentInfo) agentInfo).host) + lineEnd + lineDivider;
+                    logBuilder.AppendLine(String.Format("Time out for {0} was exceeded...", ((AgentInfo) agentInfo).host) + lineEnd + lineDivider);
                     Logging(String.Format("Time out for {0} was exceeded...", ((AgentInfo) agentInfo).host) + lineEnd + lineDivider);
                 }
             }
@@ -296,6 +295,7 @@ namespace ListPinger
                 {
                     ProgressStep();//perform progress bar steps
                     task.Wait();
+                    richTextBoxLog.Text += logBuilder;
                 }
                 manager.Clear();
                 //reporting            
