@@ -46,14 +46,14 @@ namespace SnmpLibrary
                 string community = RegexExtract.Singletone.ParseCommunity(line.Substring(host.Length));             
                 if(IPAddress.TryParse(host, out address) & !string.IsNullOrWhiteSpace(community))
                 {
-                    if (network.ContainsKey(address))
+                    if (network.ContainsKey(host))
                     {
-                        network.Remove(address);
-                        network.Add(address, community);
+                        network.Remove(host);
+                        network.Add(host, community);
                     }
                     else
                     {
-                        network.Add(address, community);
+                        network.Add(host, community);
                     }
                 }
             }            
@@ -79,12 +79,12 @@ namespace SnmpLibrary
                 try
                 {
                     byte[] data = File.ReadAllBytes(open.FileName);
-                    ImportFromTextBox();
+                   // ImportFromTextBox();
                     SortedList network = data.Deserialize();
                     StringBuilder builder = new StringBuilder();
-                    foreach (IPAddress key in network.Keys)
+                    foreach (var key in network.Keys)
                     {
-                        builder.AppendLine(key.ToString() + "\t" + network[key].ToString() + Environment.NewLine);
+                        builder.AppendLine(key+ "\t" + network[key].ToString());
                     }
                     richTextBoxLibraryContent.Text = builder.ToString();
                 }
@@ -107,9 +107,9 @@ namespace SnmpLibrary
                     ImportFromTextBox();
                     File.WriteAllBytes(save.FileName, network.Serialize());
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    MessageBox.Show("Can't Access!", "SNMP Library", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Can't Access! "+e.Message, "SNMP Library", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
         }
