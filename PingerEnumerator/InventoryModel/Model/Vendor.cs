@@ -11,10 +11,12 @@ namespace InventoryModel.Model
         public Vendor()
         {
             Nodes=new HashSet<Node>();
+          //  Keys=new HashSet<DataKey>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Node> Nodes { get; set; }
+      //  public virtual ICollection<DataKey> Keys { get; set; }
     }
 }

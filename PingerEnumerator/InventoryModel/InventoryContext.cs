@@ -10,7 +10,8 @@ namespace InventoryModel
 {
     public class InventoryContext : DbContext
     {
-        public InventoryContext()
+        public InventoryContext() :
+            base(@"data source=.\SQLEXPRESS;initial catalog=InventoryDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework")
         {
 
         }

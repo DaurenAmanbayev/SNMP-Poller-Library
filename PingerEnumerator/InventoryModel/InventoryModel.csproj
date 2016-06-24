@@ -49,6 +49,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InventoryContext.cs" />
+    <Compile Include="Migrations\201606241012338_first.cs" />
+    <Compile Include="Migrations\201606241012338_first.Designer.cs">
+      <DependentUpon>201606241012338_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606241028533_second.cs" />
+    <Compile Include="Migrations\201606241028533_second.Designer.cs">
+      <DependentUpon>201606241028533_second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606241034561_third.cs" />
+    <Compile Include="Migrations\201606241034561_third.Designer.cs">
+      <DependentUpon>201606241034561_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Vendor.cs" />
     <Compile Include="Model\Credential.cs" />
     <Compile Include="Model\Detail.cs" />
@@ -59,6 +72,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201606241012338_first.resx">
+      <DependentUpon>201606241012338_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606241028533_second.resx">
+      <DependentUpon>201606241028533_second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606241034561_third.resx">
+      <DependentUpon>201606241034561_third.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
