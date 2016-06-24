@@ -9,8 +9,9 @@ namespace InventoryModel.Model
     public class Detail
     {
         public int Id { get;set;}
-        public string Name { get; set; }
-        public string Description { get; set; }
+
+        public virtual DataKey DataKey { get; set; }
+
         public string Properties { get; set; }
         public virtual Node Node { get; set; }
     }

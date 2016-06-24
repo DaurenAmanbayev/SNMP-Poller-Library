@@ -15,7 +15,7 @@ namespace InventoryModel
 
         }
 
-        public DbSet<Area> Areas { get; set; }
+        public DbSet<Vendor> Areas { get; set; }
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<Detail> Details { get; set; }
         public DbSet<Node> Nodes { get; set; }

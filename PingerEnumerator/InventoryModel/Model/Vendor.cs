@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace InventoryModel.Model
 {
-    public class Area
+    public class Vendor
     {
-        public Area()
+        public Vendor()
         {
             Nodes=new HashSet<Node>();
         }

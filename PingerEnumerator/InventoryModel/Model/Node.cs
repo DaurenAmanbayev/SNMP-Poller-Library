@@ -11,7 +11,7 @@ namespace InventoryModel.Model
         public int Id { get; set; }
         public string Address { get; set; }
         public virtual Credential Credential { get; set; }
-        public virtual Area Area { get; set; }
+        public virtual Vendor Vendor { get; set; }
         public virtual ICollection<Detail> Details { get; set; }
     }
 }
