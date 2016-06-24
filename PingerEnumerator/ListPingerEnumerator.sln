@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListPingerEnumerator", "Lis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnmpInventory", "SnmpInventory\SnmpInventory.csproj", "{E884497B-B4C1-4417-A94A-DE695F1D5970}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryModel", "InventoryModel\InventoryModel.csproj", "{2244D6A4-84AF-4B65-BB27-639C6D7E51CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E884497B-B4C1-4417-A94A-DE695F1D5970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E884497B-B4C1-4417-A94A-DE695F1D5970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E884497B-B4C1-4417-A94A-DE695F1D5970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2244D6A4-84AF-4B65-BB27-639C6D7E51CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2244D6A4-84AF-4B65-BB27-639C6D7E51CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2244D6A4-84AF-4B65-BB27-639C6D7E51CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2244D6A4-84AF-4B65-BB27-639C6D7E51CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
