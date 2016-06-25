@@ -1,0 +1,16 @@
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\ConsoleInventory.exe.config
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\obj\Debug\ConsoleInventory.csprojResolveAssemblyReference.cache
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\ConsoleInventory.exe
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\ConsoleInventory.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\InventoryModel.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\SnmpInventoryLibrary.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\EntityFramework.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\SharpSnmpLib.Portable.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\SharpSnmpLib.Full.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\InventoryModel.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\SnmpInventoryLibrary.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\EntityFramework.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\SharpSnmpLib.Portable.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\bin\Debug\SharpSnmpLib.Full.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\obj\Debug\ConsoleInventory.exe
+E:\Repository\SnmpLibrary\PingerEnumerator\ConsoleInventory\obj\Debug\ConsoleInventory.pdb

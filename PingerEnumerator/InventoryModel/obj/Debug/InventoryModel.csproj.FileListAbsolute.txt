@@ -1,0 +1,14 @@
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\InventoryModel.dll.config
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\InventoryModel.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\InventoryModel.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\EntityFramework.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\EntityFramework.SqlServer.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\EntityFramework.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\bin\Debug\EntityFramework.SqlServer.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.csprojResolveAssemblyReference.cache
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.Migrations.first.resources
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.csproj.GenerateResource.Cache
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.Migrations.second.resources
+E:\Repository\SnmpLibrary\PingerEnumerator\InventoryModel\obj\Debug\InventoryModel.Migrations.third.resources

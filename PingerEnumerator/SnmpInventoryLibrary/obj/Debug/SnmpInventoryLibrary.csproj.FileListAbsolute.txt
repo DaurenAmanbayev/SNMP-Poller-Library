@@ -1,0 +1,16 @@
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\obj\Debug\SnmpInventoryLibrary.csprojResolveAssemblyReference.cache
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SnmpInventoryLibrary.dll.config
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SnmpInventoryLibrary.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SnmpInventoryLibrary.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\EntityFramework.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\EntityFramework.SqlServer.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\InventoryModel.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SharpSnmpLib.Full.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SharpSnmpLib.Portable.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\InventoryModel.pdb
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\EntityFramework.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\EntityFramework.SqlServer.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SharpSnmpLib.Full.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\bin\Debug\SharpSnmpLib.Portable.xml
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\obj\Debug\SnmpInventoryLibrary.dll
+E:\Repository\SnmpLibrary\PingerEnumerator\SnmpInventoryLibrary\obj\Debug\SnmpInventoryLibrary.pdb
