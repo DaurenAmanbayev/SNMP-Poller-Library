@@ -15,13 +15,14 @@ namespace SnmpInventoryLibrary
         string Sysdescription="1.3.6.1.2.1.1.1.0";
         string ifDescription="1.3.6.1.2.1.2.2.1.2";
 
+        public 
         public void Discovery(Node node)
         {
             if (node.isDiscovered == false)
             {
                 SnmpExpect expect=new SnmpExpect();
                 Detail sysDetail=new Detail();
-                sysDetail.Properties=expect.SnmpGet(node.Credential.RoCommunity, node.Address,Sysname);
+                sysDetail.Properties=expect.SnmpGet(node.Credential.RoCommunity, node.Address, Sysname);
                 Detail descrDetail=new Detail();
                 descrDetail.Properties=expect.SnmpGet(node.Credential.RoCommunity, node.Address, Sysdescription);
                 Detail interfaceDetail=new Detail();
