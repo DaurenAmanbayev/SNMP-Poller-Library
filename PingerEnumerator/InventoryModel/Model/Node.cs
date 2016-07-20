@@ -11,13 +11,13 @@ namespace InventoryModel.Model
         public Node()
         {
             Details=new HashSet<Detail>();
+            Templates=new HashSet<Template>();
         }
 
         public int Id { get; set; }
         public string Address { get; set; }
-        public bool isDiscovered { get; set; }
-        public virtual Credential Credential { get; set; }
-        public virtual Vendor Vendor { get; set; }
+        public string RoCommunity { get; set; }
+        public virtual ICollection<Template> Templates{ get; set; }
         public virtual ICollection<Detail> Details { get; set; }
     }
 }
