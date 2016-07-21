@@ -17,7 +17,6 @@ namespace InventoryModel
         }
 
         public DbSet<Template> Templates { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public DbSet<OidKey> OidKeys { get; set; }
         public DbSet<Poller> Pollers { get; set; }
         public DbSet<Detail> Details { get; set; }

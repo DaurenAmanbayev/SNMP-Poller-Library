@@ -62,7 +62,6 @@
       <DependentUpon>201606241034561_third.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Poller.cs" />
     <Compile Include="Model\Template.cs" />
     <Compile Include="Model\Detail.cs" />
