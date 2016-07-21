@@ -16,8 +16,10 @@ namespace InventoryModel
 
         }
 
-        public DbSet<Template> Areas { get; set; }
-        public DbSet<Credential> Credentials { get; set; }
+        public DbSet<Template> Templates { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<OidKey> OidKeys { get; set; }
+        public DbSet<Poller> Pollers { get; set; }
         public DbSet<Detail> Details { get; set; }
         public DbSet<Node> Nodes { get; set; }
     }

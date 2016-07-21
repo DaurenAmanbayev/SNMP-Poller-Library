@@ -12,7 +12,7 @@ namespace InventoryModel.Model
     {
         public int Id { get;set;}
         [Index("IX_UniqueDetails", 1, IsUnique = true)]
-        public virtual OidKey DataKey { get; set; }
+        public virtual OidKey OidKey { get; set; }
         public DateTime CollectDate { get; set; }
         public string Properties { get; set; }
         [Index("IX_UniqueDetails", 2, IsUnique = true)]

@@ -15,10 +15,8 @@ namespace ConsoleInventory
             Collector collect=new Collector();
             Node node=new Node();
             node.Address = "10.10.1.1";
-            node.Credential=new Credential();
-            node.Credential.RoCommunity = "public";
-            node.isDiscovered = false;
-            collect.Discovery(node);
+            node.RoCommunity = "public";
+            collect.DiscoveryByNode(node);
             Console.ReadKey();
         }
     }
