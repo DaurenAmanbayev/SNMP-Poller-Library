@@ -14,61 +14,37 @@ namespace SnmpInventoryLibrary
         string Sysname="1.3.6.1.2.1.1.5.0";
         string Sysdescription="1.3.6.1.2.1.1.1.0";
         string ifDescription="1.3.6.1.2.1.2.2.1.2";
-  
-        //public void Discovery(Node node)
-        //{
-        //    if (node.isDiscovered == false)
-        //    {
-        //        SnmpExpect expect=new SnmpExpect();
-        //        Detail sysDetail=new Detail();
-        //        sysDetail.Properties=expect.SnmpGet(node.Credential.RoCommunity, node.Address, Sysname);
-        //        Detail descrDetail=new Detail();
-        //        descrDetail.Properties=expect.SnmpGet(node.Credential.RoCommunity, node.Address, Sysdescription);
-        //        Detail interfaceDetail=new Detail();
-        //        interfaceDetail.Properties=expect.SnmpWalk(node.Credential.RoCommunity, node.Address, ifDescription);
-        //        node.Details.Add(sysDetail);
-        //        node.Details.Add(descrDetail);
-        //        node.Details.Add(interfaceDetail);
-        //        //using (InventoryContext context=new InventoryContext())
-        //        //{
-        //        //    context.Nodes.Attach(node);
-        //        //    context.SaveChanges();
-        //        //}
-        //        node.isDiscovered = true;
-
-        //        Console.WriteLine(sysDetail.Properties);
-        //        Console.WriteLine(descrDetail.Properties);
-        //        Console.WriteLine(interfaceDetail.Properties);
-        //    }
-        //}
-
+        
         public void Discovery(Poller poller)
         {
             foreach (var node in poller.Nodes)
             {
-                DiscoveryByNode(node);
+                Node temp=DiscoveryByNode(node);
+                //сохранение результатов в БД
+                using (InventoryContext context = new InventoryContext())
+                {
+                    context.Nodes.Attach(temp);
+                    context.SaveChanges();
+                }
             }
         }
 
-        public void DiscoveryByNode(Node node)
+        public Node DiscoveryByNode(Node node)
         {
             SnmpExpect expect = new SnmpExpect();
             List<OidKey> list = BuildOidList(node);
 
             foreach (var oid in list)
             {
-                Detail detail=new Detail();
-                detail.OidKey = oid;
-                detail.Node = node;
-                detail.Properties = expect.SnmpGet(node.RoCommunity, node.Address, oid.Key);
+                Detail detail = new Detail
+                {
+                    OidKey = oid,
+                    Node = node,
+                    Properties = expect.SnmpGet(node.RoCommunity, node.Address, oid.Key)
+                };
                 node.AddDetail(detail);
             }
-            
-            //using (InventoryContext context=new InventoryContext())
-            //{
-            //    context.Nodes.Attach(node);
-            //    context.SaveChanges();
-            //}
+            return node;
         }
 
         private List<OidKey> BuildOidList(Node node)
