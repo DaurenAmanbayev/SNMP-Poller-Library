@@ -12,12 +12,7 @@ namespace ConsoleInventory
     {
         static void Main(string[] args)
         {
-            Collector collect=new Collector();
-            Node node=new Node();
-            node.Address = "10.10.1.1";
-            node.RoCommunity = "public";
-            collect.DiscoveryByNode(node);
-            Console.ReadKey();
+           //
         }
     }
 }

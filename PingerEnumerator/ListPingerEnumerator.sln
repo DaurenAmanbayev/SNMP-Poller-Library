@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInventory", "Console
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnmpInventoryLibrary", "SnmpInventoryLibrary\SnmpInventoryLibrary.csproj", "{C1256E94-6027-4425-A1CC-CE85504F8088}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryGUI", "InventoryGUI\InventoryGUI.csproj", "{DEB2C049-0AFC-4AFE-AD29-4DBE107D9278}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C1256E94-6027-4425-A1CC-CE85504F8088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1256E94-6027-4425-A1CC-CE85504F8088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1256E94-6027-4425-A1CC-CE85504F8088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEB2C049-0AFC-4AFE-AD29-4DBE107D9278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEB2C049-0AFC-4AFE-AD29-4DBE107D9278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEB2C049-0AFC-4AFE-AD29-4DBE107D9278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEB2C049-0AFC-4AFE-AD29-4DBE107D9278}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
