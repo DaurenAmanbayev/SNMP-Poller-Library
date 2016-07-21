@@ -12,7 +12,7 @@ namespace InventoryModel.Model
         public Template()
         {
             Nodes=new HashSet<Node>();
-          //  Keys=new HashSet<DataKey>();
+            Keys=new HashSet<OidKey>();
         }
 
         public int Id { get; set; }
